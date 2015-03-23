@@ -292,7 +292,12 @@ ReactElement.isValidElement = function(object) {
   // within it. This leads to two different instances of React on the same
   // page. To identify a element from a different React instance we use
   // a flag instead of an instanceof check.
-  var isElement = !!(object && object._isReactElement);
+  var isElement;
+  if (object && object._reactInternalInstance && object._reactInternalInstance._currentElement) {
+    isElement = !!(object._reactInternalInstance._currentElement._isReactElement);
+  } else {
+    isElement = !!(object && (object._isReactElement));
+  }
   // if (isElement && !(object instanceof ReactElement)) {
   // This is an indicator that you're using multiple versions of React at the
   // same time. This will screw with ownership and stuff. Fix it, please.

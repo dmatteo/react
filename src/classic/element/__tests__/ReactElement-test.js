@@ -198,6 +198,10 @@ describe('ReactElement', function() {
     expect(React.isValidElement(React.createElement(Component)))
       .toEqual(true);
 
+    var renderedComponent = ReactTestUtils.renderIntoDocument(<Component />);
+    expect(React.isValidElement(renderedComponent))
+      .toEqual(true);
+
     expect(React.isValidElement(null)).toEqual(false);
     expect(React.isValidElement(true)).toEqual(false);
     expect(React.isValidElement({})).toEqual(false);
